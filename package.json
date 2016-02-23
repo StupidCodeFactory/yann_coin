@@ -1,0 +1,45 @@
+{
+  "name": "my_dapp",
+  "version": "1.0.0",
+  "description": "DAPP enabled example app",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "assign": "^0.1.7",
+    "babel-core": "^6.5.2",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "bluebird": "^3.3.1",
+    "copy-webpack-plugin": "^1.1.1",
+    "ether-pudding": "^2.0.3",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "flux": "^2.1.1",
+    "json-loader": "^0.5.4",
+    "keymirror": "^0.1.1",
+    "node-sass": "^3.4.2",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "web3": "^0.15.2",
+    "webpack": "^1.12.13",
+    "object-assign": "^4.0.1 ",
+    "truffle": "ConsenSys/truffle"
+  },
+  "devDependencies": {
+    "babel-loader": "^6.2.2",
+    "css-loader": "^0.23.1",
+    "jsx-loader": "^0.13.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.13",
+    "webpack-dev-server": "^1.14.1"
+  }
+}
