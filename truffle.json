@@ -1,7 +1,8 @@
 {
   "build": "webpack",
   "deploy": [
-    "MetaCoin"
+    "MetaCoin",
+    "Shop"
   ],
   "rpc": {
     "host": "localhost",

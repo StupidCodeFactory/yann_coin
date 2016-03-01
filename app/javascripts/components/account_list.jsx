@@ -13,7 +13,9 @@ var AccountListing = React.createClass({
     getInitialState: function () {
         return getStateFromStores();
     },
-
+    componentwillMount: function () {
+        ServiceAccount.getAccounts();
+    },
     componentDidMount: function() {
         AccountStore.addChangeEvent(this._onChange);
     },

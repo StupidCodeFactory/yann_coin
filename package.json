@@ -27,12 +27,14 @@
     "node-sass": "^3.4.2",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-router": "^2.0.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "web3": "^0.15.2",
     "webpack": "^1.12.13",
     "object-assign": "^4.0.1 ",
-    "truffle": "ConsenSys/truffle"
+    "truffle": "ConsenSys/truffle",
+    "lodash": "^4.5.1"
   },
   "devDependencies": {
     "babel-loader": "^6.2.2",

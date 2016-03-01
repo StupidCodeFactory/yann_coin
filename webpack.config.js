@@ -26,7 +26,7 @@ fs.readdirSync("./environments/" + environment + "/contracts").forEach(function(
 console.log(provided);
 
 module.exports = {
-  entry: './app/javascripts/app.js',
+  entry: './app/javascripts/app.jsx',
   output: {
     path: "./environments/" + environment + "/build",
     filename: 'app.js'
