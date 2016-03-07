@@ -62,7 +62,7 @@ var ShopService = function (shop) {
         product.price,
         product.quantity,
         product.description,
-        {from: web3.eth.accounts[0], gas: 100000}
+        {from: web3.eth.accounts[0], gas: 500000}
       ).then(function(res) {
         console.log('res');
         console.log(res);
