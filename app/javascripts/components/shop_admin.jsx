@@ -11,7 +11,7 @@ var ShopAmin = React.createClass({
                 </div>
 
                 <div className="pure-u-2-3">
-                    <ProductTable />
+                    <ProductTable admin={true}/>
                 </div>
             </main>
         );

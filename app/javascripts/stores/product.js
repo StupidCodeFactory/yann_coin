@@ -1,20 +1,20 @@
-var Dispatcher     = require('../dispatcher/dispatcher');
-var EventEmitter   = require('events').EventEmitter;
-var assign         = require('object-assign');
-var ActionTypes    = require('../constants/dapps_constants').ActionTypes;
-
-var ServiceProduct = require('../services/product');
+var Dispatcher      = require('../dispatcher/dispatcher');
+var EventEmitter    = require('events').EventEmitter;
+var assign          = require('object-assign');
+var ActionTypes     = require('../constants/dapps_constants').ActionTypes;
+var NewProductStore = require('./new_product');
+var ServiceProduct  = require('../services/product');
 
 var _products    = {};
 var CHANGE_EVENT = 'change';
 
 var ProductStore = (assign({}, EventEmitter.prototype, {
   all: function (force) {
-    console.log(force);
+
     if (force) {
       ServiceProduct.all();
     }
-    console.log(_products);
+
     return _products;
   },
   set: function (product) {
@@ -29,15 +29,16 @@ var ProductStore = (assign({}, EventEmitter.prototype, {
 }));
 
 ProductStore.dispatchToken = Dispatcher.register(function (action) {
+  Dispatcher.waitFor([NewProductStore.dispatchToken]);
+
   switch(action.type) {
-  case ActionTypes.CREATE_PRODUCT:
-    console.log('ActionTypes.CREATE_PRODUCT');
-    ServiceProduct.create(action.product);
+  case ActionTypes.PRODUCT_UPDATED:
+    ProductStore.set(action.product);
+    ProductStore.emitChange();
     break;
   case ActionTypes.PRODUCT_CREATED:
     ProductStore.set(action.product);
-    console.log('ActionTypes.PRODUCT_CREATED');
-    ProductStore.emitChange(CHANGE_EVENT);
+    ProductStore.emitChange();
     break;
   default:
   }

@@ -42,7 +42,6 @@ BalanceStore.dispatchToken = Dispatcher.register(function (action) {
     BalanceStore.emitChange();
     break;
   case ActionTypes.CREATE_TRANSFER:
-    console.log(ActionTypes.TRANSFER_AMOUNT);
     MetaCoin.transfer(
       action.transfer.from,
       action.transfer.to,

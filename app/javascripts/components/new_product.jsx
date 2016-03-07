@@ -1,17 +1,13 @@
 var React                     = require('react');
 var ProductWriteActionCreator = require('../actions/product_write_action_creator');
+var NewProductStore           = require('../stores/new_product');
 
 function getInitialstate () {
-    return {
-        product_name: null,
-        price:        0,
-        quantity:     0,
-        description:  null
-    };
+    return NewProductStore.get();
 }
 
 var NewProduct = React.createClass({
-    getInitialstate: function () {
+    getInitialState: function () {
         return getInitialstate();
     },
     onProductChange: function (event) {
@@ -21,7 +17,19 @@ var NewProduct = React.createClass({
     },
     handleOnSubmit: function (event) {
         event.preventDefault();
-        ProductWriteActionCreator.createProduct(this.state);
+
+        if (this.state.id == null) {
+            ProductWriteActionCreator.createProduct(this.state);
+        } else {
+            ProductWriteActionCreator.updateProduct(this.state);
+        }
+
+    },
+    componentDidMount: function () {
+        NewProductStore.addChangeEvent(this._onChange);
+    },
+    _onChange: function () {
+        this.setState(NewProductStore.get());
     },
     render: function() {
         return (
@@ -38,6 +46,7 @@ var NewProduct = React.createClass({
                                     id="product-name"
                                     className="pure-u-23-24"
                                     type="text"
+                                    value={this.state.product_name}
                                     onChange={this.onProductChange}
                                 />
 
@@ -47,6 +56,7 @@ var NewProduct = React.createClass({
                                     id="price"
                                     className="pure-u-23-24"
                                     type="number"
+                                    value={this.state.price}
                                     onChange={this.onProductChange}
                                 />
 
@@ -56,6 +66,7 @@ var NewProduct = React.createClass({
                                     id="quantity"
                                     className="pure-u-23-24"
                                     type="number"
+                                    value={this.state.quantity}
                                     onChange={this.onProductChange}
                                 />
                             </div>
@@ -66,6 +77,8 @@ var NewProduct = React.createClass({
                                     id="description"
                                     className="pure-u-1"
                                     rows="8"
+                                    defaultValue={this.state.description}
+                                    value={this.state.description}
                                     onChange={this.onProductChange}
                                 />
                             </div>

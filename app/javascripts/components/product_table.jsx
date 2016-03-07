@@ -3,21 +3,32 @@ var ProductStore    = require('../stores/product');
 var ProductListItem = require('./product_list_item');
 var _               = require('lodash');
 
+var allProductLoaded = false;
+
 var ProductTable   = React.createClass({
     getInitialState: function () {
-        return { products: ProductStore.all(true) }
+        return { products:  [] }
     },
     componentWillMount: function () {
         ProductStore.addChangeEvent(this._onChange);
     },
+    componentDidMount: function () {
+        if (!allProductLoaded) {
+            ProductStore.all(true);
+            allProductLoaded = !allProductLoaded;
+        } else {
+            this.setState({products: ProductStore.all()});
+        }
+
+    },
+    componentWillUnmount: function () {
+    },
     render: function() {
         var tableRows  = [];
+        _.forEach(this.state.products, function (product, productId) {
+            tableRows.push(<ProductListItem key={productId} product={product} admin={this.props.admin}/>)
+        }.bind(this));
 
-        _.forEach(function (productId, product) {
-            console.log('asdasd');
-            tableRows.push(<ProductListItem key={productId} product={product}/>)
-        });
-        console.log(tableRows);
         return (
             <table className="pure-table pure-table-striped">
                 <thead>
@@ -26,6 +37,7 @@ var ProductTable   = React.createClass({
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Description</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,11 +47,8 @@ var ProductTable   = React.createClass({
         )
     },
     _onChange: function () {
-        console.log(ProductStore.all());
         this.setState({ products: ProductStore.all() });
     }
-
-
 });
 
 module.exports = ProductTable;

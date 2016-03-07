@@ -10,6 +10,8 @@ module.exports = {
     BALANCE_UPDATED:       null,
     MINT_COIN:             null,
     CREATE_PRODUCT:        null,
-    PRODUCT_CREATED:       null
+    PRODUCT_CREATED:       null,
+    UPDATE_PRODUCT:        null,
+    PRODUCT_UPDATED:       null
   })
 };
