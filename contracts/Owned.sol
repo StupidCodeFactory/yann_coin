@@ -1,10 +1,9 @@
 contract Owned {
+        address owner;
 
-                address owner;
+        function Owned() {
+                owner = msg.sender;
+        }
 
-                function Owned() {
-                        owner = msg.sender;
-                }
-
-                modifier onlyOwner { if (msg.sender != owner) throw; _ }
+        modifier onlyOwner { if (msg.sender != owner) throw; _ }
 }

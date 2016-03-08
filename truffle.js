@@ -1,4 +1,4 @@
-{
+module.exports = {
   "build": "webpack",
   "deploy": [
     "MetaCoin",
@@ -8,4 +8,4 @@
     "host": "localhost",
     "port": 8101
   }
-}
+};

@@ -1,6 +1,7 @@
 var React                = require('react');
 var BalanceActionCreator = require('../actions/balance_action_creator');
 var AccountStore         = require('../stores/account_store');
+var AccountSelect        = require('./account_select');
 
 var SendCoinForm = React.createClass({
     propTypes: {
@@ -36,9 +37,7 @@ var SendCoinForm = React.createClass({
 
         return (
             <form className="pure-form pure-form-stacked" onSubmit={this.handleOnSubmit}>
-                <select onChange={this.handleOnAccountSelect}>
-                    {accountOptions}
-                </select>
+                <AccountSelect handleOnAccountSelect={this.handleOnAccountSelect}/>
                 <input
                     className="pure-input-1"
                     type="text"

@@ -1,6 +1,7 @@
 var BalanceActionCreator = require('../actions/balance_action_creator');
-var web3 = new Web3();
-web3.setProvider(new web3.providers.HttpProvider(WEB3_PROVIDER_LOCATION));
+
+var web3 = require('./web3');
+
 Pudding.setWeb3(web3);
 MetaCoin.load(Pudding);
 var Meta = MetaCoin.deployed();
@@ -30,13 +31,10 @@ var MetaCoin = function (meta) {
 
   function WatchForAmountReceived(account) {
     var event = meta.OnCoinReceived({receiver: account});
-    console.log(event);
     event.watch(function (error, result) {
       if (error) {
         console.log(error);
       } else {
-        console.log('WatchForAmountReceived');
-        console.log(result);
         BalanceActionCreator.balanceUpdated(
           result.args.receiver,
           result.args.newBalance.toString(10)

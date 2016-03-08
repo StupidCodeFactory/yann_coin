@@ -1,7 +1,11 @@
 var React   = require('react');
 var Link    = require('react-router').Link;
+var AccountSelect = require('./account_select');
 
 var TopMenu = React.createClass({
+    handleOnAccountSelect: function (event) {
+        console.log(event.target.value);
+    },
     render: function () {
 
         var menuItems = [
@@ -10,6 +14,12 @@ var TopMenu = React.createClass({
             </li>,
             <li key="shop-admin" className="pure-menu-item">
                 <Link to="/admin/shop" className="pure-menu-link" >Shop Admin</Link>
+            </li>,
+            <li key="accounts" className="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                <form className="pure-form">
+                    <label>Select operating account</label>
+                    <AccountSelect name="currentAccount" handleOnAccountSelect={this.handleOnAccountSelect} />
+                </form>
             </li>
         ];
 
