@@ -2,10 +2,11 @@ var React        = require('react');
 var SendCoinForm = require('./send_coin_form');
 var MintCoinForm = require('./mint_coint');
 var BalanceStore = require('../stores/balance_store');
+var AdminStore   = require('../stores/admin');
 var BalanceActionCreator = require('../actions/balance_action_creator.js');
 
 function getStateFromStores(accountId) {
-    return { account: accountId, balance: BalanceStore.get(accountId) };
+    return { account: accountId, balance: BalanceStore.get(accountId), admin:  };
 }
 
 var AccountListItem = React.createClass({

@@ -4,8 +4,6 @@ var ServiceBalance = require('../services/balance');
 
 var ActionTypes = DappsConstants.ActionTypes;
 
-var _accounts = {};
-
 module.exports = {
   receiveAll: function (rawAccounts) {
     ServiceBalance.getBalances(rawAccounts);

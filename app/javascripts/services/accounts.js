@@ -1,5 +1,6 @@
 var AccountsActionCreator = require('../actions/accounts_action_creator');
-var web3 = new Web3();
+var web3                  = require('./web3');
+
 web3.setProvider(new web3.providers.HttpProvider(WEB3_PROVIDER_LOCATION));
 
 module.exports = {

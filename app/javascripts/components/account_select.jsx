@@ -1,7 +1,6 @@
-var React          = require('react');
-var AccountStore   = require('../stores/account_store');
-var ServiceAccount = require('../services/accounts');
-
+var React                = require('react');
+var AccountStore         = require('../stores/account_store');
+var ServiceAccount       = require('../services/accounts');
 
 var AccountSelect = React.createClass({
     getInitialState: function () {

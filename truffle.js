@@ -2,7 +2,8 @@ module.exports = {
   "build": "webpack",
   "deploy": [
     "MetaCoin",
-    "Shop"
+    "Shop",
+    "Admin"
   ],
   "rpc": {
     "host": "localhost",

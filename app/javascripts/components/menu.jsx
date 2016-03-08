@@ -1,10 +1,11 @@
-var React   = require('react');
-var Link    = require('react-router').Link;
-var AccountSelect = require('./account_select');
+var React                = require('react');
+var Link                 = require('react-router').Link;
+var AccountSelect        = require('./account_select');
+var CurrentAccountAction = require('../actions/current_account');
 
 var TopMenu = React.createClass({
     handleOnAccountSelect: function (event) {
-        console.log(event.target.value);
+        CurrentAccountAction.select(event.target.value);
     },
     render: function () {
 
