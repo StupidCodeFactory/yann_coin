@@ -53,7 +53,7 @@ contract Admin {
 
         modifier AdminOnly {
                 uint admin_length = admins.length;
-                for(uint i; i < admin_length; i++) {
+                for(uint i = 0; i < admin_length; i++) {
                         if (msg.sender == admins[i]) {
                                 _
                         }

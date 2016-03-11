@@ -24,7 +24,7 @@ contract Shop is Admin {
                 return product_id;
         }
 
-        function updateProduct(uint product_id, string product_name, uint price, uint quantity, string description) AdminOnly returns (uint updated_product_id) {
+        function updateProduct(uint product_id, string product_name, uint price, uint quantity, string description) AdminOnly() returns (uint updated_product_id) {
 
                 Product p = products[product_id];
                 p.product_name = product_name;
