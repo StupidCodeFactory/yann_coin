@@ -1,12 +1,12 @@
 var React        = require('react');
 var SendCoinForm = require('./send_coin_form');
 var MintCoinForm = require('./mint_coint');
+var AdminForm    = require('./admin_form');
 var BalanceStore = require('../stores/balance_store');
-var AdminStore   = require('../stores/admin');
 var BalanceActionCreator = require('../actions/balance_action_creator.js');
 
 function getStateFromStores(accountId) {
-    return { account: accountId, balance: BalanceStore.get(accountId), admin:  };
+    return { account: accountId, balance: BalanceStore.get(accountId) };
 }
 
 var AccountListItem = React.createClass({
@@ -17,6 +17,7 @@ var AccountListItem = React.createClass({
         BalanceStore.addChangeEvent(this._onChange);
     },
     componentDidMount: function () {
+
     },
     render: function () {
         return (
@@ -25,12 +26,13 @@ var AccountListItem = React.createClass({
                 <td>{this.state.balance}</td>
                 <td><SendCoinForm from={this.state.account}/></td>
                 <td><MintCoinForm receiver={this.state.account}/></td>
+                <td><AdminForm account={this.state.account}/></td>
             </tr>
         )
     },
     _onChange: function() {
         this.setState(getStateFromStores(this.props.account));
-    }
+    },
 });
 
 module.exports = AccountListItem;

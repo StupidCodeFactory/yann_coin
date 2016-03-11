@@ -2,10 +2,18 @@ var Dispatcher     = require('../dispatcher/dispatcher');
 var ActionTypes    = require('../constants/dapps_constants').ActionTypes;
 
 module.exports = {
-  get: function (account) {
+  updated: function (account, value) {
     Dispatcher.dispatch({
-      type: ActionTypes.GET_BALANCE,
-      account: account
+      type:    ActionTypes.ADMIN_RECEIVED,
+      account: account,
+      admin:   value
+    });
+  },
+  set: function (account, value) {
+    Dispatcher.dispatch({
+      type:    ActionTypes.SET_ADMIN,
+      account: account,
+      admin:   value
     });
   }
 };

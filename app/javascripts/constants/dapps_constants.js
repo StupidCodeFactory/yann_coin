@@ -14,6 +14,6 @@ module.exports = {
     UPDATE_PRODUCT:           null,
     PRODUCT_UPDATED:          null,
     CURRENT_ACCOUNT_SELECTED: null,
-    ADMIN_RECEIVED:           null
+    ADMIN_RECEIVED:           null,
   })
 };

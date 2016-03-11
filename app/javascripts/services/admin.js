@@ -1,35 +1,51 @@
-var Dispatcher   =  require('../dispatcher/dispatcher');
-var EventEmitter = require('events').EventEmitter;
-var assign       = require('object-assign');
-var ActionTypes  = require('../constants/dapps_constants').ActionTypes;
-var AccountStore = require('../stores/account_store');
-var AdminService = require('../services/admin');
-var _admins      = {};
-var CHANGE_EVENT = 'change';
+var web3               = require('./web3');
+var CurrentAccount     = require('../stores/current_account');
+var AdminActionCreator = require('../actions/admin_action_creator');
+var Pudding            = require('ether-pudding');
+Pudding.setWeb3(web3);
+Admin.load(Pudding);
 
-var _admins = {};
-var AdminStore = assign({}, EventEmitter.prototype, {
-  get: function (account) {
-    return _admins[account];
-  },
-  set: function (account, value) {
-    _admins[account] = value;
-  },
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-  addChangeEvent: function (callback) {
-    this.on(CHANGE_EVENT, callback);
-  }
-});
+var AdminService = function (AdminContract) {
+  function WatchForAdminReceived(accountId) {
+    var event = AdminContract.WatchForAdminReceived({account_id: accountId}, {toBlock: 'latest'});
+    event.watch(function (error, result) {
+      if (error) {
+        throw error;
+      }
 
-AdminStore.dispatchToken = Dispatcher.register(function (action) {
-  switch(action.type) {
-  case ActionTypes.ADMIN_RECEIVED:
-    AdminStore.set(action.account, action.admin);
-    AdminStore.emitChange();
-    break;
-  default:
+      AdminActionCreator.updated(result.args.account, result.args.admin);
+      event.stopWatching();
+    });
 
   }
-});
+  function WatchForAdminChanged(accountId) {
+    var event = AdminContract.OnAdminChanged({account_id: accountId}, {toBlock: 'latest'});
+    event.watch(function (error, result) {
+      if (error) {
+        throw error;
+      }
+      console.log('WatchForAdminChanged');
+      AdminActionCreator.updated(result.args.account, result.args.admin);
+      event.stopWatching();
+    });
+  }
+
+  return {
+    get: function (account) {
+      AdminContract.get(account, {from: CurrentAccount.get()}).then(function () {
+        WatchForAdminReceived(account);
+      }).catch(function (error) {
+        throw error;
+      });
+    },
+    set: function (account, admin) {
+      AdminContract.set(account, admin, {from: CurrentAccount.get(), gas: 500000}).then(function () {
+        WatchForAdminChanged(account);
+      }).catch(function (error) {
+        throw error;
+      });
+    }
+  };
+};
+
+module.exports = new AdminService(Admin.deployed());

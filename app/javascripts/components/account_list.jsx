@@ -13,8 +13,7 @@ var AccountListing = React.createClass({
     getInitialState: function () {
         return getStateFromStores();
     },
-    componentwillMount: function () {
-        ServiceAccount.getAccounts();
+    componentWillMount: function () {
     },
     componentDidMount: function() {
         AccountStore.addChangeEvent(this._onChange);
@@ -34,7 +33,7 @@ var AccountListing = React.createClass({
                     <tr>
                         <th>Accounts</th>
                         <th>Balances</th>
-                        <th colSpan="2">Actions</th>
+                        <th colSpan="3">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,6 +44,7 @@ var AccountListing = React.createClass({
         );
     },
     _onChange: function() {
+        console.log('accout list on change');
         this.setState(getStateFromStores());
     }
 });

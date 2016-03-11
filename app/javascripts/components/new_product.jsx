@@ -2,13 +2,13 @@ var React                     = require('react');
 var ProductWriteActionCreator = require('../actions/product_write_action_creator');
 var NewProductStore           = require('../stores/new_product');
 
-function getInitialstate () {
+function getInitialStateFromStore () {
     return NewProductStore.get();
 }
 
 var NewProduct = React.createClass({
     getInitialState: function () {
-        return getInitialstate();
+        return getInitialStateFromStore();
     },
     onProductChange: function (event) {
         var state = {}

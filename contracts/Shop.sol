@@ -13,12 +13,11 @@ contract Shop is Admin {
         uint products_count;
 
         mapping(uint => Product) products;
-        address[] admins;
 
         event OnProductCreated(uint product_id, string product_name, uint price, uint quantity, string description);
         event OnProductUpdated(uint product_id, string product_name, uint price, uint quantity, string description);
 
-        function createProduct(string product_name, uint price, uint quantity, string description) AdminOnly returns (uint product_id) {
+        function createProduct(string product_name, uint price, uint quantity, string description) returns (uint product_id) {
                 product_id           = products_count++;
                 products[product_id] = Product(product_id, product_name, price, quantity, description);
                 OnProductCreated(product_id, product_name, price, quantity, description);
@@ -38,7 +37,7 @@ contract Shop is Admin {
         }
 
         function Shop() {
-
+                products_count = 0;
         }
 
 }

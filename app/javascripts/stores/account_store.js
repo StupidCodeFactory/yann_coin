@@ -1,7 +1,6 @@
 var Dispatcher     =  require('../dispatcher/dispatcher');
 var EventEmitter   = require('events').EventEmitter;
 var assign         = require('object-assign');
-var BalanceStore = require('../stores/balance_store');
 var Promise        = require('bluebird');
 var DappsConstants = require('../constants/dapps_constants');
 
@@ -31,6 +30,7 @@ var AccountStore = (assign({}, EventEmitter.prototype, {
 
 
 AccountStore.dispatchToken = Dispatcher.register(function (action) {
+
   switch(action.type) {
   case ActionTypes.RECEIVE_RAW_ACCOUNT:
     AccountStore.init(action.rawAccounts);

@@ -18,7 +18,6 @@ var TopMenu = React.createClass({
             </li>,
             <li key="accounts" className="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                 <form className="pure-form">
-                    <label>Select operating account</label>
                     <AccountSelect name="currentAccount" handleOnAccountSelect={this.handleOnAccountSelect} />
                 </form>
             </li>

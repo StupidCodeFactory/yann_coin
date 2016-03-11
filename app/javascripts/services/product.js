@@ -60,7 +60,7 @@ var ShopService = function (shop) {
         product.price,
         product.quantity,
         product.description,
-        {from: CurrentAccount.get(), gas: 500000}
+        {from: CurrentAccount.get(), gas: 1000000}
       ).then(function(res) {
         console.log('res');
         console.log(res);
